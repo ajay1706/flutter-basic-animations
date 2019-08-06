@@ -16,16 +16,33 @@ class _CounterAnimatorState extends State<CounterAnimator> with SingleTickerProv
   super.initState();
     _controller = AnimationController(
         duration: Duration(seconds: 3),
-        
+
         vsync: this);
-    animation = new CurvedAnimation(parent: _controller,
-        curve: Curves.easeIn);
+    animation  = new Tween(begin: 0.0 , end: 30.0).animate(_controller)
+  ..addStatusListener((status){
+
+
+    if(status == AnimationStatus.completed){
+      _controller.reverse(from: 5.0);
+    }
+  })
+
+      ..addListener((){
+    this.setState((){
+debugPrint("Animation Tween ${animation.value}");
+
+
+    });
+  });
+
+//    animation = new CurvedAnimation(parent: _controller,
+//        curve: Curves.easeIn);
     _controller.addListener((){
       setState(() {
         
         this.setState((){
           _counter++;
-          debugPrint("print $_counter");
+          debugPrint("print ${_controller.value}");
         });
       });
 
@@ -49,7 +66,7 @@ class _CounterAnimatorState extends State<CounterAnimator> with SingleTickerProv
             ? (_counter).toStringAsFixed(2)
             : "Lets Begin",
         style: TextStyle(
-          fontSize: 24.0 *_controller.value + 16.0
+          fontSize: 24.0 *animation.value + 16.0
         ),
 
 
