@@ -25,6 +25,12 @@ class _CounterAnimatorState extends State<CounterAnimator> with SingleTickerProv
     if(status == AnimationStatus.completed){
       _controller.reverse(from: 5.0);
     }
+    else if(status == AnimationStatus.reverse){
+      this.setState((){
+_counter = _counter -400;
+debugPrint("======> Reducing ===> : $_counter");
+      });
+    }
   })
 
       ..addListener((){
