@@ -4,6 +4,7 @@ import 'package:flutter/animation.dart';
 
 
 
+
  class ChainAnimation extends AnimatedWidget{
 
 
@@ -13,11 +14,13 @@ import 'package:flutter/animation.dart';
  static final _sizeTween = Tween<double>(begin: 0.0,end: 175.0);
 
 
+
   ChainAnimation({Key key, Animation<double> animation})
 
    :  super(key: key, listenable:animation);
 
-   @override
+
+  @override
   Widget build(BuildContext context) {
   final Animation<double> animation = listenable;
     return Center(
@@ -28,7 +31,11 @@ import 'package:flutter/animation.dart';
         height: _sizeTween.evaluate(animation),
         width: _sizeTween.evaluate(animation),
         child: FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            print("Hello Peeps");
+
+          },
+          color: Colors.redAccent,
           child: Text("Button"),
 
 
